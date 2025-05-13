@@ -39,9 +39,9 @@ img=$(cat dockerhub-image.yml)
 for i in ${img[@]}
 do
     tagName=$(echo $i | awk -F "/" '{print $NF}');
-    crictl pull  --creds '用户:密码' $i;
+    nerdctl pull   $i;
     sourceTag=$(cat images-init.yml | grep $tagName);
-    ctr -n k8s.io i  tag $i $sourceTag;
+    nerdctl tag $i $sourceTag;
 done
 
 
